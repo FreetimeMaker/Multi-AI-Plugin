@@ -1,4 +1,4 @@
-package com.freetime.maip.settings
+package com.freetime.maic.settings
 
 import com.intellij.openapi.options.Configurable
 import org.jetbrains.annotations.Nls
@@ -13,7 +13,7 @@ class AppSettingsConfigurable : Configurable {
 
     @Nls(capitalization = Nls.Capitalization.Title)
     override fun getDisplayName(): String {
-        return "Multi AI Plugin Settings"
+        return "Multi AI Chat Settings"
     }
 
     override fun createComponent(): JComponent? {

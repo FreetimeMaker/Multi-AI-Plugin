@@ -1,4 +1,4 @@
-package com.freetime.maip.settings
+package com.freetime.maic.settings
 
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
@@ -7,8 +7,8 @@ import com.intellij.openapi.application.ApplicationManager
 import com.intellij.util.xmlb.XmlSerializerUtil
 
 @State(
-    name = "com.freetime.maip.settings.AppSettingsState",
-    storages = [Storage("MultiAiPluginSettings.xml")]
+    name = "com.freetime.maic.settings.AppSettingsState",
+    storages = [Storage("MultiAiChatSettings.xml")]
 )
 class AppSettingsState : PersistentStateComponent<AppSettingsState> {
     var openAiKey: String = ""

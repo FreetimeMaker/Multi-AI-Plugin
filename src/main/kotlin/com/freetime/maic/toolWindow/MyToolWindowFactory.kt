@@ -1,8 +1,8 @@
-package com.freetime.maip.toolWindow
+package com.freetime.maic.toolWindow
 
-import com.freetime.maip.api.AiClientFactory
-import com.freetime.maip.services.ChatService
-import com.freetime.maip.settings.AppSettingsState
+import com.freetime.maic.api.AiClientFactory
+import com.freetime.maic.services.ChatService
+import com.freetime.maic.settings.AppSettingsState
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
@@ -28,16 +28,18 @@ class MyToolWindowFactory : ToolWindowFactory {
         val contentPanel = JPanel(BorderLayout())
         private val chatArea = JBTextArea()
         private val inputField = JTextField()
-        private val sendButton = JButton("Senden")
+        private val sendButton = JButton("Send")
         private val providerBox = ComboBox(arrayOf("OpenAI", "Gemini", "Anthropic"))
-        private val clearButton = JButton("Leeren")
+        private val clearButton = JButton("Clear")
         private val chatService = project.service<ChatService>()
         private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
 
         init {
             val topPanel = JPanel(BorderLayout())
             providerBox.selectedItem = AppSettingsState.instance.selectedProvider
-            providerBox.addActionListener { AppSettingsState.instance.selectedProvider = providerBox.selectedItem as String }
+            providerBox.addActionListener { 
+                AppSettingsState.instance.selectedProvider = providerBox.selectedItem as String 
+            }
             topPanel.add(providerBox, BorderLayout.CENTER)
             topPanel.add(clearButton, BorderLayout.EAST)
             
@@ -74,12 +76,12 @@ class MyToolWindowFactory : ToolWindowFactory {
             if (text.isNotBlank()) {
                 inputField.text = ""
                 scope.launch {
-                    chatService.emitDelta("Du", text, true)
-                    chatService.emitDelta("KI", "", true)
+                    chatService.emitDelta("You", text, true)
+                    chatService.emitDelta("AI", "", true)
                     
                     withContext(Dispatchers.IO) {
                         AiClientFactory.getClient().generateResponseStream(text).collect { chunk ->
-                            chatService.emitDelta("KI", chunk, false)
+                            chatService.emitDelta("AI", chunk, false)
                         }
                     }
                 }

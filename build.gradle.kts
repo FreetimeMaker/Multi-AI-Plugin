@@ -33,12 +33,17 @@ dependencies {
 
 intellijPlatform {
     pluginConfiguration {
-        id = "com.freetime.maip"
-        name = "Multi AI Plugin"
+        id = "com.freetime.maic"
+        name = "Multi AI Chat"
         vendor {
-            name = "Freetime Maekr"
+            name = "Freetime Maker"
         }
-        description = "Multi AI Plugin for all JetBrains IDEs."
+        description = """
+            Comprehensive Multi AI assistant for JetBrains IDEs. 
+            This tool integrates major AI providers including OpenAI (GPT-4), 
+            Anthropic (Claude 3), and Google Gemini into your coding workflow.
+            Features include code explanation, real-time chat, and multi-provider switching.
+        """.trimIndent()
     }
 }
 

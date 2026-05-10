@@ -1,7 +1,7 @@
-package com.freetime.maip.actions
+package com.freetime.maic.actions
 
-import com.freetime.maip.api.AiClientFactory
-import com.freetime.maip.services.ChatService
+import com.freetime.maic.api.AiClientFactory
+import com.freetime.maic.services.ChatService
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
@@ -19,16 +19,16 @@ class ExplainCodeAction : AnAction() {
         val chatService = project.service<ChatService>()
 
         if (selectedText.isNotBlank()) {
-            val toolWindow = ToolWindowManager.getInstance(project).getToolWindow("MultiAIWindow")
+            val toolWindow = ToolWindowManager.getInstance(project).getToolWindow("MultiAIChatWindow")
             toolWindow?.show()
 
             CoroutineScope(Dispatchers.IO).launch {
-                chatService.emitDelta("System", "Erkläre Code...", true)
-                val prompt = "Erkläre mir diesen Code ausführlich:\n\n```\n$selectedText\n```"
+                chatService.emitDelta("System", "Explaining code...", true)
+                val prompt = "Please explain this code in detail:\n\n```\n$selectedText\n```"
                 
-                chatService.emitDelta("KI", "", true)
+                chatService.emitDelta("AI", "", true)
                 AiClientFactory.getClient().generateResponseStream(prompt).collect { chunk ->
-                    chatService.emitDelta("KI", chunk, false)
+                    chatService.emitDelta("AI", chunk, false)
                 }
             }
         }

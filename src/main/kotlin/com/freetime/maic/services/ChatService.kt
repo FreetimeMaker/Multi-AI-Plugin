@@ -1,4 +1,4 @@
-package com.freetime.maip.services
+package com.freetime.maic.services
 
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.project.Project

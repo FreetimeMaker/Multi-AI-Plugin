@@ -1,7 +1,7 @@
-package com.freetime.maip.api
+package com.freetime.maic.api
 
 import com.google.gson.Gson
-import com.freetime.maip.settings.AppSettingsState
+import com.freetime.maic.settings.AppSettingsState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okhttp3.MediaType.Companion.toMediaType
@@ -23,7 +23,7 @@ class OpenAIClient(private val apiKey: String) : AiClient {
 
     override fun generateResponseStream(prompt: String): Flow<String> = flow {
         if (apiKey.isBlank()) {
-            emit("Fehler: Kein API-Key hinterlegt.")
+            emit("Error: No API key provided.")
             return@flow
         }
 
@@ -41,7 +41,7 @@ class OpenAIClient(private val apiKey: String) : AiClient {
 
         val response = client.newCall(request).execute()
         if (!response.isSuccessful) {
-            emit("Fehler: ${response.code}")
+            emit("Error: ${response.code}")
             response.close()
             return@flow
         }
@@ -69,8 +69,13 @@ class OpenAIClient(private val apiKey: String) : AiClient {
     private data class Delta(val content: String?)
 }
 
-class AnthropicClient(val key: String) : AiClient { override fun generateResponseStream(prompt: String) = flow { emit("Anthropic Streaming...") } }
-class GeminiClient(val key: String) : AiClient { override fun generateResponseStream(prompt: String) = flow { emit("Gemini Streaming...") } }
+class AnthropicClient(val key: String) : AiClient { 
+    override fun generateResponseStream(prompt: String) = flow { emit("Anthropic streaming coming soon...") } 
+}
+
+class GeminiClient(val key: String) : AiClient { 
+    override fun generateResponseStream(prompt: String) = flow { emit("Gemini streaming coming soon...") } 
+}
 
 object AiClientFactory {
     fun getClient(): AiClient {

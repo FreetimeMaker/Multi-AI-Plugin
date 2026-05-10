@@ -1,28 +1,34 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-  <id>com.freetime.maip</id>
-  <name>Multi AI Plugin</name>
-  <vendor>Freetime Maekr</vendor>
+  <id>com.freetime.maic</id>
+  <name>Multi AI Chat</name>
+  <vendor>Freetime Maker</vendor>
   <version>1.0.0</version>
-  <description><![CDATA[Multi AI Plugin for all JetBrains IDEs. Supports OpenAI, Anthropic, and more.]]></description>
+  <description><![CDATA[
+    Comprehensive Multi AI assistant for JetBrains IDEs.
+    This tool integrates major AI providers including OpenAI (GPT-4),
+    Anthropic (Claude 3), and Google Gemini into your coding workflow.
+    Features include code explanation, real-time chat, and multi-provider switching.
+  ]]></description>
+
   <idea-version since-build="232" />
 
   <depends>com.intellij.modules.platform</depends>
-  <resource-bundle>messages.MyBundle</resource-bundle>
+
   <extensions defaultExtensionNs="com.intellij">
-    <toolWindow factoryClass="com.freetime.maip.toolWindow.MyToolWindowFactory" id="MultiAIWindow" name="Multi AI Chat" anchor="right" icon="AllIcons.Actions.Refresh"/>
+    <toolWindow factoryClass="com.freetime.maic.toolWindow.MyToolWindowFactory" id="MultiAIChatWindow" name="Multi AI Chat" anchor="right" icon="AllIcons.Actions.Refresh"/>
     <notificationGroup id="Multi AI Notifications" displayType="BALLOON"/>
-    <applicationConfigurable instance="com.freetime.maip.settings.AppSettingsConfigurable" id="com.freetime.maip.settings.AppSettingsConfigurable" displayName="Multi AI Plugin"/>
-    <applicationService serviceImplementation="com.freetime.maip.settings.AppSettingsState"/>
+    <applicationConfigurable instance="com.freetime.maic.settings.AppSettingsConfigurable" id="com.freetime.maic.settings.AppSettingsConfigurable" displayName="Multi AI Chat"/>
+    <applicationService serviceImplementation="com.freetime.maic.settings.AppSettingsState"/>
   </extensions>
 
   <actions>
     <group id="MultiAiContextGroup" text="Multi AI" popup="true">
       <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-      <action id="com.freetime.maip.actions.ExplainCodeAction"
-              class="com.freetime.maip.actions.ExplainCodeAction"
-              text="Code erklären"
-              description="Markierten Code durch KI erklären lassen">
+      <action id="com.freetime.maic.actions.ExplainCodeAction"
+              class="com.freetime.maic.actions.ExplainCodeAction"
+              text="Explain Code"
+              description="Explain selected code using AI">
       </action>
     </group>
   </actions>
