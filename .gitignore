@@ -1,0 +1,7 @@
+.intellijPlatform/
+build/
+.idea/
+*.iml
+
+# Project exclude paths
+/.gradle/

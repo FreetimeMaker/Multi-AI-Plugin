@@ -1,0 +1,29 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+  <id>com.freetime.maip</id>
+  <name>Multi AI Plugin</name>
+  <vendor>Freetime Maekr</vendor>
+  <version>1.0.0</version>
+  <description><![CDATA[Multi AI Plugin for all JetBrains IDEs. Supports OpenAI, Anthropic, and more.]]></description>
+  <idea-version since-build="232" />
+
+  <depends>com.intellij.modules.platform</depends>
+  <resource-bundle>messages.MyBundle</resource-bundle>
+  <extensions defaultExtensionNs="com.intellij">
+    <toolWindow factoryClass="com.freetime.maip.toolWindow.MyToolWindowFactory" id="MultiAIWindow" name="Multi AI Chat" anchor="right" icon="AllIcons.Actions.Refresh"/>
+    <notificationGroup id="Multi AI Notifications" displayType="BALLOON"/>
+    <applicationConfigurable instance="com.freetime.maip.settings.AppSettingsConfigurable" id="com.freetime.maip.settings.AppSettingsConfigurable" displayName="Multi AI Plugin"/>
+    <applicationService serviceImplementation="com.freetime.maip.settings.AppSettingsState"/>
+  </extensions>
+
+  <actions>
+    <group id="MultiAiContextGroup" text="Multi AI" popup="true">
+      <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+      <action id="com.freetime.maip.actions.ExplainCodeAction"
+              class="com.freetime.maip.actions.ExplainCodeAction"
+              text="Code erklären"
+              description="Markierten Code durch KI erklären lassen">
+      </action>
+    </group>
+  </actions>
+</idea-plugin>
