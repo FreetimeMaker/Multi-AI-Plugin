@@ -26,7 +26,7 @@ dependencies {
         instrumentationTools()
     }
 
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:okhttp:5.3.2")
     implementation("com.google.code.gson:gson:2.14.0")
     implementation("org.json:json:20231013")
 }
